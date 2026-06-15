@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pomodoro Study Method</title>
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=BBH+Hegarty&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- STYLE -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- ============================================== -->
+    <!-- NAVBAR SECTION -->
+    <!-- ============================================== -->
+    <nav class="navbar">
+      <a href="#" class="navbar-title"><span>Pomodoro </span> Study Method </a>
+      <button class="btn music nav-music" id="musicBtn" aria-label="Toggle Music" title="Background Music">
+        <i data-feather="music"></i>
+      </button>
+    </nav>
+    <!-- NAVBAR END -->
+
+    <!-- MAIN -->
+    <div class="container">
+      <div class="box">
+        <h2>FOCUS TIMER</h2>
+
+
+        <!-- TIMER -->
+        <h2 class="timer-mode-title" id="modeTitle">WORK TIME</h2>
+        <div class="timer-modes">
+          <span class="mode-indicator active" id="workIndicator">Work (50:00)</span>
+          <span class="mode-indicator" id="restIndicator">Rest (10:00)</span>
+        </div>
+        <p class="timer" id="timer">50:00</p>
+
+        <!-- ============================================== -->
+        <!-- TIMER BUTTONS -->
+        <!-- START, RESET, and REST controls -->
+        <!-- ============================================== -->
+        <div class="buttons">
+          <button class="btn start" id="startBtn">START</button>
+          <button class="btn rest" id="restBtn">REST</button>
+          <button class="btn reset" id="resetBtn">RESET</button>
+        </div>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- STICKY NOTE TODO LIST SECTION -->
+      <!-- Used for tracking tasks during the pomodoro session -->
+      <!-- ============================================== -->
+      <div class="sticky-note">
+        <h2 class="todo-title">Study List</h2>
+        <div class="input-group">
+          <input type="text" id="taskInput" placeholder="Add task..." />
+          <button id="addBtn" class="add-btn">Add</button>
+        </div>
+        <ul id="taskList" class="task-list">
+          <!-- Tasks appear here -->
+        </ul>
+      </div>
+    </div>
+    <!-- MAIN END -->
+
+    <!-- ============================================== -->
+    <!-- BENEFITS / MANFAAT POMODORO SECTION -->
+    <!-- Information about why the Pomodoro method is useful -->
+    <!-- ============================================== -->
+    <section class="benefits-section">
+      <div class="benefits-container">
+        <h2 class="benefits-title">Manfaat Pomodoro Technique</h2>
+        
+        <p class="benefits-desc">
+          Pomodoro Technique membantu meningkatkan fokus dan produktivitas dengan membagi waktu kerja menjadi sesi singkat yang terstruktur. Dengan metode ini, kamu bisa bekerja lebih konsisten tanpa merasa cepat lelah. Istirahat teratur juga membantu otak tetap segar, mengurangi stres, dan menjaga motivasi belajar atau bekerja sepanjang hari.
+        </p>
+
+        <div class="benefits-separator"></div>
+
+        <ul class="benefits-list">
+          <li><span>Meningkatkan fokus dan konsentrasi saat bekerja</span></li>
+          <li><span>Mengurangi rasa lelah dan burnout</span></li>
+          <li><span>Produktivitas lebih konsisten setiap hari</span></li>
+          <li><span>Membantu manajemen waktu lebih efektif</span></li>
+          <li><span>Belajar dan kerja jadi lebih terstruktur & teratur</span></li>
+        </ul>
+      </div>
+    </section>
+    <!-- Manfaat Pomodoro End -->
+    <!-- ============================================== -->
+    <!-- SCRIPTS & AUDIO RESOURCES -->
+    <!-- ============================================== -->
+    <script src="js/script.js" defer></script>
+
+    <!-- AUDIO ALERT -->
+    <audio id="alarmSound" src="Alarm.mp3"></audio>
+    <audio id="bgMusic" src="lagu.mp3" loop></audio>
+  </body>
+</html>
