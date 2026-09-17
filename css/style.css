@@ -175,39 +175,51 @@ h1, h2, h3, .timer {
 
 .buttons {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   width: 100%;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .btn {
-  background: transparent;
+  background: rgba(0,0,0,0.3);
   border: 1px solid var(--color-brass-dim);
   color: var(--color-brass);
   font-family: var(--font-display);
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  padding: 0.75rem 2rem;
-  font-size: 0.9rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
-  min-height: 44px;
+  transition: all 0.2s ease;
+  min-height: 48px;
+  border-radius: 4px;
 }
 
 .btn:hover {
   border-color: var(--color-brass-glow);
   color: var(--color-brass-glow);
-  background: rgba(181,136,64,0.05);
+  background: rgba(181,136,64,0.1);
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(1px);
 }
 
 .btn.start {
-  border-color: var(--color-lamp-green);
-  color: var(--color-lamp-green-glow);
+  background: var(--color-lamp-green);
+  color: var(--color-paper);
+  border: 1px solid var(--color-lamp-green-glow);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
 }
 
 .btn.start:hover {
-  background: rgba(0,90,54,0.15);
+  background: var(--color-lamp-green-glow);
+  color: var(--color-mahogany-dark);
   border-color: var(--color-lamp-green-glow);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.5);
 }
 
 .btn.rest {
