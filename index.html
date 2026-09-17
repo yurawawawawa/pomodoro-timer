@@ -8,10 +8,7 @@
     <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=BBH+Hegarty&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet" />
 
     <!-- Feather Icons -->
     <script src="https://unpkg.com/feather-icons"></script>
@@ -20,89 +17,70 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <!-- ============================================== -->
     <!-- NAVBAR SECTION -->
-    <!-- ============================================== -->
     <nav class="navbar">
-      <a href="#" class="navbar-title"><span>Pomodoro </span> Study Method </a>
-      <button class="btn music nav-music" id="musicBtn" aria-label="Toggle Music" title="Background Music">
+      <a href="#" class="navbar-title">Pomodoro <span>Method</span></a>
+      <button class="nav-music" id="musicBtn" aria-label="Toggle Background Music" title="Background Music">
         <i data-feather="music"></i>
       </button>
     </nav>
-    <!-- NAVBAR END -->
 
     <!-- MAIN -->
     <div class="container">
-      <div class="box">
-        <h2>FOCUS TIMER</h2>
+      
+      <!-- TIMER INSTRUMENT -->
+      <div class="timer-instrument">
+        <h1 class="visually-hidden">Focus Timer</h1>
 
-
-        <!-- TIMER -->
-        <h2 class="timer-mode-title" id="modeTitle">WORK TIME</h2>
-        <div class="timer-modes">
-          <span class="mode-indicator active" id="workIndicator">Work (50:00)</span>
-          <span class="mode-indicator" id="restIndicator">Rest (10:00)</span>
+        <div class="timer-modes" aria-hidden="true">
+          <span class="mode-indicator active" id="workIndicator">Work Session</span>
+          <span class="mode-indicator" id="restIndicator">Recess</span>
         </div>
-        <p class="timer" id="timer">50:00</p>
+        
+        <p class="timer" id="timer" aria-live="polite" aria-atomic="true">50:00</p>
 
-        <!-- ============================================== -->
-        <!-- TIMER BUTTONS -->
-        <!-- START, RESET, and REST controls -->
-        <!-- ============================================== -->
         <div class="buttons">
-          <button class="btn start" id="startBtn">START</button>
-          <button class="btn rest" id="restBtn">REST</button>
-          <button class="btn reset" id="resetBtn">RESET</button>
+          <button class="btn start" id="startBtn">Engage</button>
+          <button class="btn rest" id="restBtn">Recess</button>
+          <button class="btn reset" id="resetBtn">Reset</button>
         </div>
       </div>
 
-      <!-- ============================================== -->
       <!-- STICKY NOTE TODO LIST SECTION -->
-      <!-- Used for tracking tasks during the pomodoro session -->
-      <!-- ============================================== -->
-      <div class="sticky-note">
-        <h2 class="todo-title">Study List</h2>
+      <div class="scholars-notepad">
+        <h2 class="notepad-title">Study Ledger</h2>
         <div class="input-group">
-          <input type="text" id="taskInput" placeholder="Add task..." />
-          <button id="addBtn" class="add-btn">Add</button>
+          <label for="taskInput" class="visually-hidden">Add new task</label>
+          <input type="text" id="taskInput" placeholder="Inscribe task..." aria-label="Add new task to study list" />
+          <button id="addBtn" class="add-btn" aria-label="Add Task">Add</button>
         </div>
-        <ul id="taskList" class="task-list">
+        <ul id="taskList" class="task-list" aria-live="polite">
           <!-- Tasks appear here -->
         </ul>
       </div>
-    </div>
-    <!-- MAIN END -->
 
-    <!-- ============================================== -->
-    <!-- BENEFITS / MANFAAT POMODORO SECTION -->
-    <!-- Information about why the Pomodoro method is useful -->
-    <!-- ============================================== -->
+    </div>
+
+    <!-- BENEFITS SECTION -->
     <section class="benefits-section">
       <div class="benefits-container">
-        <h2 class="benefits-title">Manfaat Pomodoro Technique</h2>
+        <h2 class="benefits-title">The Method's Virtue</h2>
         
         <p class="benefits-desc">
-          Pomodoro Technique membantu meningkatkan fokus dan produktivitas dengan membagi waktu kerja menjadi sesi singkat yang terstruktur. Dengan metode ini, kamu bisa bekerja lebih konsisten tanpa merasa cepat lelah. Istirahat teratur juga membantu otak tetap segar, mengurangi stres, dan menjaga motivasi belajar atau bekerja sepanjang hari.
+          The Pomodoro Technique cultivates deep focus by structuring labor into discrete, intense intervals. Through this discipline, the scholar works with consistency, avoiding intellectual fatigue. Regular recess preserves mental acuity, ensuring rigor throughout the day's study.
         </p>
 
-        <div class="benefits-separator"></div>
-
         <ul class="benefits-list">
-          <li><span>Meningkatkan fokus dan konsentrasi saat bekerja</span></li>
-          <li><span>Mengurangi rasa lelah dan burnout</span></li>
-          <li><span>Produktivitas lebih konsisten setiap hari</span></li>
-          <li><span>Membantu manajemen waktu lebih efektif</span></li>
-          <li><span>Belajar dan kerja jadi lebih terstruktur & teratur</span></li>
+          <li><span>Fortifies concentration during deep reading and writing.</span></li>
+          <li><span>Prevents intellectual fatigue and burnout.</span></li>
+          <li><span>Establishes a consistent rhythm of scholarly output.</span></li>
+          <li><span>Imposes rigorous bounds upon unstructured time.</span></li>
         </ul>
       </div>
     </section>
-    <!-- Manfaat Pomodoro End -->
-    <!-- ============================================== -->
-    <!-- SCRIPTS & AUDIO RESOURCES -->
-    <!-- ============================================== -->
-    <script src="js/script.js" defer></script>
 
-    <!-- AUDIO ALERT -->
+    <!-- SCRIPTS & AUDIO RESOURCES -->
+    <script src="js/script.js" defer></script>
     <audio id="alarmSound" src="Alarm.mp3"></audio>
     <audio id="bgMusic" src="lagu.mp3" loop></audio>
   </body>

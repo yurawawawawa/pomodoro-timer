@@ -1,503 +1,485 @@
-/* ========================================================================= */
-/* CSS Variables & Global Resets */
-/* ========================================================================= */
 :root {
-  --primary: #f2ece6;
-  --bg: #ff7b00;
-  --rest: #4db8ff; /* Blue color for rest timer */
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  outline: none;
-  text-decoration: none;
+  --color-mahogany: #2A1B14;
+  --color-mahogany-light: #3d281e;
+  --color-mahogany-dark: #1f140f;
+  
+  --color-brass: #B58840;
+  --color-brass-dim: #8b662d;
+  --color-brass-glow: #e2b260;
+  
+  --color-lamp-green: #005A36;
+  --color-lamp-green-glow: #00995c;
+  
+  --color-paper: #F4F1EA;
+  --color-paper-dark: #e8e3d8;
+  --color-ink: #2b2b2b;
+  --color-ink-muted: #5c5c5c;
+  
+  --font-display: 'Cormorant Garamond', serif;
+  --font-text: 'Newsreader', serif;
 }
 
 body {
-  font-family: "Poppins", sans-serif;
-  color: black;
-  min-height: 2000px;
-  background: #ab5300;
-  background: linear-gradient(135deg, #ff7b00, #ff9a3c, #ff4db8);
+  background-color: var(--color-mahogany);
+  background-image: 
+    radial-gradient(circle at 50% 0%, var(--color-mahogany-light) 0%, var(--color-mahogany) 70%),
+    url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.04"/></svg>');
+  color: var(--color-paper);
+  font-family: var(--font-text);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* ========================================================================= */
-/* NAVBAR COMPONENT */
-/* Fixed top navigation bar with gradient background */
-/* ========================================================================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
+h1, h2, h3, .timer {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+::selection {
+  background: var(--color-lamp-green);
+  color: var(--color-paper);
+}
+
+/* Navbar */
 .navbar {
+  width: 100%;
+  padding: 1.5rem 2rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  padding: 1.4rem 7%;
-  border-bottom: 5px solid #f2ece6;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  background: #ab5300;
-  background: linear-gradient(135deg, #ff7b00, #ff4db8);
-  z-index: 99999999999999;
+  border-bottom: 1px solid var(--color-brass-dim);
+  background: linear-gradient(to bottom, var(--color-mahogany-dark), transparent);
 }
 
 .navbar-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: white;
+  color: var(--color-brass);
+  font-size: 1.5rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   text-decoration: none;
-  background-color: #ff7b00;
-  background: linear-gradient(135deg, #ff7b00, #ff4db8);
-  border-radius: 20px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
-  padding: 1rem;
+  font-family: var(--font-display);
 }
 
 .navbar-title span {
-  color: black;
+  color: var(--color-paper);
   font-style: italic;
-  margin-right: 0.2rem;
+  text-transform: lowercase;
 }
 
 .nav-music {
-  position: absolute;
-  right: 7%;
-  width: 50px;
-  height: 50px;
+  background: transparent;
+  color: var(--color-brass-dim);
+  border: 1px solid var(--color-brass-dim);
   border-radius: 50%;
-  padding: 0;
-  border: none;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-/* ========================================================================= */
-/* MAIN LAYOUT & POMODORO TIMER BOX */
-/* Holds the timer and sticky note components */
-/* ========================================================================= */
+.nav-music:hover {
+  color: var(--color-brass-glow);
+  border-color: var(--color-brass-glow);
+  background: rgba(181, 136, 64, 0.1);
+}
 
+.nav-music.active {
+  color: var(--color-lamp-green-glow);
+  border-color: var(--color-lamp-green-glow);
+  background: rgba(0, 153, 92, 0.1);
+}
+
+/* Container */
 .container {
-  min-height: 100vh;
   display: flex;
+  flex-direction: row;
+  align-items: flex-start;
   justify-content: center;
-  align-items: center;
-  padding-top: 6rem;
-  gap: 3rem;
+  gap: 4rem;
+  padding: 4rem 2rem;
+  width: 100%;
+  max-width: 1100px;
   flex-wrap: wrap;
 }
 
-.box {
-  width: 340px;
-  padding: 2.5rem;
-  background-color: #fff;
-  border-radius: 20px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
-  text-align: center;
+/* Timer Instrument */
+.timer-instrument {
+  background: var(--color-mahogany-dark);
+  padding: 3rem;
+  border-radius: 8px;
+  border: 2px solid var(--color-brass-dim);
+  box-shadow: 
+    inset 0 0 40px rgba(0,0,0,0.8),
+    0 20px 50px rgba(0,0,0,0.5),
+    0 0 0 1px rgba(181,136,64,0.1);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 480px;
 }
 
-.box h2 {
-  font-size: 1.2rem;
-  letter-spacing: 2px;
-  margin-bottom: 1rem;
-  color: #555;
-}
-
-.timer-mode-title {
-  font-size: 1.1rem;
-  letter-spacing: 2px;
-  color: #555;
-  margin-bottom: 0.5rem;
-  text-transform: uppercase;
-  font-weight: 700;
+.timer-instrument::before {
+  content: '';
+  position: absolute;
+  top: 1rem; right: 1rem; bottom: 1rem; left: 1rem;
+  border: 1px solid rgba(181,136,64,0.2);
+  pointer-events: none;
 }
 
 .timer-modes {
   display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--color-brass-dim);
+  padding-bottom: 0.5rem;
 }
 
 .mode-indicator {
-  font-size: 0.85rem;
-  padding: 0.3rem 0.8rem;
-  border-radius: 20px;
-  background-color: #f0f0f0;
-  color: #777;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-brass-dim);
+  transition: color 0.4s ease, text-shadow 0.4s ease;
 }
 
 .mode-indicator.active {
-  background-color: var(--primary);
-  color: var(--bg);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  color: var(--color-lamp-green-glow);
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.5);
 }
 
 .timer {
-  font-size: 4rem;
-  font-weight: 700;
-  margin-bottom: 2rem;
-  color: var(--bg);
+  font-size: 7rem;
   line-height: 1;
+  color: var(--color-brass-glow);
+  margin-bottom: 3rem;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.8);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
 }
 
 .buttons {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
+  width: 100%;
   justify-content: center;
 }
 
 .btn {
-  padding: 0.8rem 1.2rem;
-  border-radius: 12px;
+  background: transparent;
+  border: 1px solid var(--color-brass-dim);
+  color: var(--color-brass);
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding: 0.75rem 2rem;
   font-size: 0.9rem;
-  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
-  flex: 1;
-}
-
-.btn.start {
-  background-color: var(--bg);
-  color: white;
-}
-
-.btn.rest {
-  background-color: var(--rest);
-  color: white;
-}
-
-.btn.reset {
-  background-color: #eee;
-  color: #333;
-}
-
-.btn.music {
-  background-color: #eee;
-  color: #333;
-  padding: 0.8rem 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.btn.music.active {
-  background-color: var(--bg);
-  color: white;
+  transition: all 0.3s ease;
+  min-height: 44px;
 }
 
 .btn:hover {
-  transform: translateY(-2px);
-  opacity: 0.9;
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+  border-color: var(--color-brass-glow);
+  color: var(--color-brass-glow);
+  background: rgba(181,136,64,0.05);
 }
 
-/* ========================================================================= */
-/* BENEFITS SECTION (MANFAAT POMODORO) */
-/* Styling for the informational text area */
-/* ========================================================================= */
-.benefits-section {
-  padding: 4rem 2rem 6rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.btn.start {
+  border-color: var(--color-lamp-green);
+  color: var(--color-lamp-green-glow);
 }
 
-.benefits-container {
-  background: white;
-  max-width: 800px;
+.btn.start:hover {
+  background: rgba(0,90,54,0.15);
+  border-color: var(--color-lamp-green-glow);
+}
+
+.btn.rest {
+  border-color: var(--color-brass);
+}
+
+.btn.reset {
+  color: #888;
+  border-color: #555;
+}
+
+/* Scholar's Notepad */
+.scholars-notepad {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  padding: 3rem 2.5rem;
   width: 100%;
-  border-radius: 24px;
-  padding: 3rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  max-width: 440px;
+  min-height: 450px;
+  box-shadow: 
+    4px 10px 30px rgba(0,0,0,0.4),
+    inset 0 0 50px rgba(0,0,0,0.03);
   position: relative;
-  overflow: hidden;
+  background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.05"/></svg>');
 }
 
-/* Subtle Gradient Accent Line at the top */
-.benefits-container::before {
-  content: "";
+.scholars-notepad::before {
+  content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 6px;
-  background: linear-gradient(135deg, #ff7b00, #ff4db8);
+  top: 0; bottom: 0; left: 1.5rem;
+  width: 2px;
+  background: rgba(181,136,64,0.3);
 }
 
-.benefits-title {
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
-.benefits-desc {
-  font-size: 1.05rem;
-  color: #666;
-  line-height: 1.8;
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.benefits-separator {
-  height: 3px;
-  width: 60px;
-  background: linear-gradient(135deg, #ff7b00, #ff4db8);
-  margin: 0 auto 2rem;
-  border-radius: 3px;
-}
-
-.benefits-list {
-  list-style-type: none;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 0 1rem;
-}
-
-.benefits-list li {
-  display: flex;
-  align-items: center;
-  font-size: 1.05rem;
-  color: #444;
-  background: #fafafa;
-  padding: 1rem 1.5rem;
-  border-radius: 12px;
-  border: 1px solid #eee;
-  transition:
-    transform 0.2s,
-    box-shadow 0.2s;
-}
-
-.benefits-list li:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  border-color: #ffd2b3; /* peach tint */
-}
-
-.benefits-list li::before {
-  content: "✓";
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 24px;
-  height: 24px;
-  background: linear-gradient(135deg, #ff7b00, #ff4db8);
-  color: white;
-  border-radius: 50%;
-  font-size: 0.8rem;
-  font-weight: bold;
-  margin-right: 15px;
-  flex-shrink: 0;
-}
-
-/* ========================================================================= */
-/* STICKY NOTE TODO LIST COMPONENT */
-/* Note-taking interface with rotation effect */
-/* ========================================================================= */
-.sticky-note {
-  width: 320px;
-  min-height: 320px;
-  background-color: #fbf0aa;
-  /* Sticky note yellow */
-  padding: 1.5rem;
-  box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.2);
-  border-radius: 2px 2px 2px 15px;
-  /* Slight folded feeling */
-  position: relative;
-  /* Rotate slightly for realistic effect */
-  transform: rotate(2deg);
-  transition: transform 0.3s ease;
-}
-
-.sticky-note:hover {
-  transform: rotate(0deg);
-}
-
-.sticky-note::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 30px;
-  background-color: rgba(0, 0, 0, 0.05);
-  /* Tape/shadow effect */
-}
-
-.todo-title {
-  margin-top: 5px;
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: #333;
-  text-align: center;
-  font-family: "Poppins", sans-serif;
-  border-bottom: 2px dashed rgba(0, 0, 0, 0.2);
+.notepad-title {
+  font-size: 1.8rem;
+  color: var(--color-mahogany);
+  border-bottom: 2px solid var(--color-ink-muted);
   padding-bottom: 0.5rem;
+  margin-bottom: 2rem;
+  margin-left: 2rem;
+  letter-spacing: 0.05em;
+  font-style: italic;
 }
 
 .input-group {
   display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+  margin-left: 2rem;
+  border-bottom: 1px solid var(--color-ink-muted);
+  margin-bottom: 2rem;
+  position: relative;
 }
 
 #taskInput {
   flex: 1;
-  padding: 0.5rem;
-  border: 1px solid rgba(0, 0, 0, 0.1);
   background: transparent;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.3);
-  font-family: inherit;
-  font-size: 0.9rem;
-  transition: border-color 0.2s;
+  border: none;
+  padding: 0.75rem 0;
+  font-family: var(--font-text);
+  font-size: 1.1rem;
+  color: var(--color-ink);
+  min-height: 44px;
 }
 
 #taskInput:focus {
-  border-bottom-color: var(--bg);
+  outline: none;
+}
+
+#taskInput::placeholder {
+  color: var(--color-ink-muted);
+  font-style: italic;
 }
 
 .add-btn {
-  padding: 0.5rem 1rem;
-  background-color: var(--bg);
-  color: white;
+  background: transparent;
   border: none;
-  border-radius: 5px;
+  color: var(--color-mahogany);
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
   cursor: pointer;
-  font-weight: bold;
-  transition: all 0.2s;
+  padding: 0 1rem;
+  min-height: 44px;
 }
 
 .add-btn:hover {
-  background-color: #ff9a3c;
+  color: var(--color-lamp-green-glow);
 }
 
 .task-list {
   list-style: none;
-  max-height: 200px;
-  overflow-y: auto;
-  padding-right: 5px;
-}
-
-.task-list::-webkit-scrollbar {
-  width: 5px;
-}
-
-.task-list::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
+  margin-left: 2rem;
 }
 
 .task-item {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 0;
-  border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
-  gap: 0.5rem;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px dashed rgba(0,0,0,0.1);
+  min-height: 44px;
 }
 
-.task-item:last-child {
-  border-bottom: none;
+.checkbox {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--color-ink-muted);
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+  margin-top: 4px;
+  flex-shrink: 0;
 }
 
-.task-item.completed .task-text {
-  text-decoration: line-through;
-  opacity: 0.6;
+.checkbox:checked {
+  background: var(--color-mahogany);
+  border-color: var(--color-mahogany);
+}
+
+.checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 5px; top: 1px;
+  width: 4px; height: 8px;
+  border: solid var(--color-paper);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
 }
 
 .task-text {
   flex: 1;
-  font-size: 0.95rem;
-  color: #222;
-  word-break: break-all;
+  font-size: 1.1rem;
+  line-height: 1.5;
 }
 
-.checkbox {
-  cursor: pointer;
-  width: 18px;
-  height: 18px;
-  accent-color: var(--bg);
+.task-item.completed .task-text {
+  text-decoration: line-through;
+  color: var(--color-ink-muted);
 }
 
 .delete-btn {
   background: transparent;
   border: none;
-  color: #e74c3c;
+  color: var(--color-ink-muted);
+  font-family: var(--font-text);
+  font-size: 1.2rem;
   cursor: pointer;
-  font-size: 1.5rem;
-  line-height: 1;
-  transition: transform 0.2s;
-  padding: 0 4px;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .delete-btn:hover {
-  transform: scale(1.2);
+  color: #a00;
 }
 
-/* ========================================================================= */
-/* MOBILE RESPONSIVE QUERIES */
-/* Viewport adaptations for max-width 600px */
-/* ========================================================================= */
-@media screen and (max-width: 600px) {
-  .navbar {
-    padding: 1rem;
-    justify-content: flex-start;
-  }
+.task-list {
+  max-height: 250px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
 
-  .navbar-title {
-    font-size: 1.1rem;
-    padding: 0.5rem 1rem;
-    max-width: 75%;
-  }
+.task-list::-webkit-scrollbar {
+  width: 6px;
+}
 
-  .nav-music {
-    width: 40px;
-    height: 40px;
-    right: 1rem;
-  }
+.task-list::-webkit-scrollbar-thumb {
+  background: var(--color-brass-dim);
+}
 
+/* Benefits Section */
+.benefits-section {
+  width: 100%;
+  max-width: 900px;
+  margin: 2rem auto 6rem;
+  padding: 0 2rem;
+}
+
+.benefits-container {
+  border-top: 1px solid var(--color-brass-dim);
+  padding-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.benefits-title {
+  font-size: 2rem;
+  color: var(--color-brass-glow);
+  margin-bottom: 2rem;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+.benefits-desc {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  text-align: center;
+  color: var(--color-paper-dark);
+  margin-bottom: 3rem;
+  max-width: 700px;
+}
+
+.benefits-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .benefits-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.benefits-list li {
+  padding: 1.5rem;
+  border: 1px solid rgba(181,136,64,0.2);
+  background: rgba(0,0,0,0.2);
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  color: var(--color-paper);
+}
+
+.benefits-list li::before {
+  content: '§';
+  font-family: var(--font-display);
+  color: var(--color-lamp-green-glow);
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+/* Visually Hidden */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Responsive */
+@media screen and (max-width: 800px) {
   .container {
-    padding-top: 7.5rem;
-    gap: 2rem;
-  }
-
-  .box, .sticky-note {
-    width: 92%;
-    max-width: 340px;
-  }
-
-  .timer-modes {
-    gap: 0.3rem;
-  }
-
-  .mode-indicator {
-    font-size: 0.8rem;
-    padding: 0.2rem 0.6rem;
-  }
-
-  .timer {
-    font-size: 3.5rem;
-  }
-
-  .benefits-section {
-    padding: 2rem 1rem 4rem;
-  }
-
-  .benefits-container {
+    gap: 3rem;
     padding: 2rem 1.5rem;
   }
+  .timer { font-size: 5rem; }
+  .timer-instrument { padding: 2rem 1.5rem; }
+  .buttons { flex-direction: column; gap: 1rem; }
+  .scholars-notepad { padding: 2rem 1.5rem; }
+  .notepad-title { margin-left: 1.5rem; }
+  .input-group { margin-left: 1.5rem; }
+  .task-list { margin-left: 1.5rem; }
+}
 
-  .benefits-title {
-    font-size: 1.5rem;
-  }
-
-  .benefits-list li {
-    font-size: 0.95rem;
-    padding: 0.8rem 1rem;
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

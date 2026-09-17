@@ -76,10 +76,10 @@ document.addEventListener("DOMContentLoaded", () => {
         restBtn.textContent = "REST"; // Reset rest button text
         
         // Update UI Indicators
-        modeTitle.textContent = "WORK TIME";
+        modeTitle.textContent = "Work Session";
         workIndicator.classList.add("active");
         restIndicator.classList.remove("active");
-        timerDisplay.style.color = "var(--bg)"; // Orange for work
+        timerDisplay.style.color = "var(--color-brass-glow)"; // Brass for work
     }
 
     if (!isRunning) {
@@ -109,10 +109,10 @@ document.addEventListener("DOMContentLoaded", () => {
         startBtn.textContent = "START"; // Reset start button text
         
         // Update UI Indicators
-        modeTitle.textContent = "REST TIME";
+        modeTitle.textContent = "Recess";
         workIndicator.classList.remove("active");
         restIndicator.classList.add("active");
-        timerDisplay.style.color = "var(--rest)"; // Blue for rest
+        timerDisplay.style.color = "var(--color-lamp-green-glow)"; // Green for rest
     }
 
     // Toggle rest timer start/pause
@@ -142,10 +142,10 @@ document.addEventListener("DOMContentLoaded", () => {
     displayTime(time);
     
     // Reset UI Indicators
-    modeTitle.textContent = "WORK TIME";
+    modeTitle.textContent = "Work Session";
     workIndicator.classList.add("active");
     restIndicator.classList.remove("active");
-    timerDisplay.style.color = "var(--bg)";
+    timerDisplay.style.color = "var(--color-brass-glow)";
   });
 
   // ============================================================================
