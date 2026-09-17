@@ -3,7 +3,8 @@
 A modern pomodoro timer web app built using vanilla HTML, CSS, and JavaScript.  
 This project was made to practice frontend fundamentals such as DOM manipulation, timer logic, and responsive UI design.
 
-<img width="1892" height="1092" alt="image" src="https://github.com/user-attachments/assets/0144c8aa-f895-4276-8ce1-bd31f86e6787" />
+<img width="1891" height="1086" alt="image" src="https://github.com/user-attachments/assets/2b489aa4-dfd7-457a-85a8-5dfafa4aef1b" />
+
 
 
 
